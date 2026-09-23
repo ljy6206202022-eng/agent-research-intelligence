@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-research-intelligence"
+version = "0.1.0a0"
+description = "Local-first, agent-agnostic evidence-backed research"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = {file = "LICENSE"}
+dependencies = [
+  "pydantic>=2.11,<3",
+  "psutil>=7,<8",
+]
+
+[project.optional-dependencies]
+browser = ["playwright>=1.50,<2"]
+audio = ["faster-whisper>=1.2,<2", "imageio-ffmpeg>=0.6,<1", "yt-dlp>=2026.8.19"]
+
+[project.scripts]
+research-intel = "agent_research_intelligence.cli.bootstrap:main"
+
+[dependency-groups]
+dev = ["pytest>=8.3,<9", "build>=1.2,<2"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent_research_intelligence"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

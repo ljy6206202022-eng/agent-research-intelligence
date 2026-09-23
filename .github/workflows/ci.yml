@@ -1,0 +1,25 @@
+name: public-package
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.11'
+      - name: Install
+        run: uv sync --locked --group dev
+      - name: Unit and fixture integration
+        run: uv run --no-sync pytest -q
+      - name: CLI smoke
+        run: |
+          uv run --no-sync research-intel --help > /dev/null
+          uv run --no-sync research-intel status > /dev/null
+          uv run --no-sync research-intel contract-list > /dev/null
+      - name: Package build
+        run: uv build
+      - name: Private-data and secret scan
+        run: python3 scripts/public_scan.py

@@ -1,0 +1,11 @@
+{
+  "workspace": "YOUR_PATH",
+  "public_queries_require_explicit_consent": true,
+  "account_write": false,
+  "automatic_subscription": false,
+  "external_code_execution": false,
+  "production_modification": false,
+  "background_monitoring": false,
+  "cloud_required": false,
+  "ambient_cookies": false
+}

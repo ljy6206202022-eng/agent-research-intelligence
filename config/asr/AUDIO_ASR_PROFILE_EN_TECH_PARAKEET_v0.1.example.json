@@ -1,0 +1,64 @@
+{
+  "id": "AUDIO_ASR_PROFILE_EN_TECH_PARAKEET_v0.1",
+  "status": "USER_CONFIGURED_LOCAL_ONLY",
+  "default_enabled": false,
+  "model": {
+    "repository": "mlx-community/parakeet-tdt-0.6b-v3",
+    "revision": "ed2b7e8c15f9aaa0b5772e2efb986255eaef7e15",
+    "directory": "cache/models/audio/parakeet-tdt-0.6b-v3",
+    "license": "cc-by-4.0",
+    "files": []
+  },
+  "runtime_versions": {
+    "parakeet-mlx": "0.5.2",
+    "mlx": "0.32.2",
+    "mlx-metal": "0.32.2"
+  },
+  "runtime_files": {},
+  "configuration": {
+    "decoding": {
+      "decoding": {},
+      "sentence": {
+        "max_words": null,
+        "silence_gap": null,
+        "max_duration": null
+      }
+    },
+    "preprocessor": {
+      "sample_rate": 16000,
+      "normalize": "per_feature",
+      "window_size": 0.025,
+      "window_stride": 0.01,
+      "window": "hann",
+      "features": 128,
+      "n_fft": 512,
+      "dither": 1e-05,
+      "pad_to": 0,
+      "pad_value": 0,
+      "preemph": 0.97,
+      "mag_power": 2.0
+    },
+    "dtype": "bfloat16 (official default)",
+    "chunk_duration": 120.0,
+    "overlap_duration": 15.0,
+    "language": "automatic multilingual; API has no language/prompt option",
+    "from_pretrained_local_path": "cache/models/audio/parakeet-tdt-0.6b-v3"
+  },
+  "language": "en input; native API automatic multilingual",
+  "resources": {
+    "system_available_min_GiB": 6,
+    "task_rss_max_GiB": 6,
+    "task_physical_footprint_max_GiB": 6,
+    "mlx_active_plus_cache_max_GiB": 6,
+    "mlx_memory_limit_GiB": 6,
+    "mlx_cache_limit_MiB": 256,
+    "OMP_BLAS_limits": 2,
+    "single_heavy_task": true
+  },
+  "quality": "UNASSESSED_PER_INPUT",
+  "support": "ENGLISH_TECHNICAL_LECTURE_LIMITED",
+  "license": {
+    "implementation": "Apache-2.0",
+    "model": "CC-BY-4.0"
+  }
+}
