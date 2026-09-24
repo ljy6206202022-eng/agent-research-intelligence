@@ -29,6 +29,11 @@ def main(argv=None) -> int:
     public.add_argument('--paper-query')
     public.add_argument('--crossref-query')
     public.add_argument('--allow-public-network',action='store_true')
+    packet=commands.add_parser('report-packet',help='Prepare a bounded evidence handoff from a sealed discovery job')
+    packet.add_argument('--job',required=True)
+    publish=commands.add_parser('report-publish',help='Validate citations and save an agent-authored report revision')
+    publish.add_argument('--packet',required=True,help='Workspace-relative report packet')
+    publish.add_argument('--draft',required=True,help='Workspace-relative agent draft JSON')
     commands.add_parser("backup", help="Consistent backup of this tool's database")
     commands.add_parser('contract-list',help='Inspect all 32 Versioned Appendix B contracts')
     legacy=commands.add_parser('project-discovery',help='Project sealed discovery artifacts into unified contracts; REUSED_REAL, no new research claim')
@@ -147,6 +152,12 @@ def main(argv=None) -> int:
                 workspace.write(prefix+'/'+name+'.json',canonical(value))
             result=DiscoveryResearch(workspace).run(*(prefix+'/'+name+'.json' for name in ('intake','brief','approval','seeds')))
             result.update(question_id=question['id'],prior_record_counts=prior,request_id=ident)
+        elif args.command == 'report-packet':
+            from agent_research_intelligence.research.agent_report import prepare_packet
+            result=prepare_packet(workspace,args.job)
+        elif args.command == 'report-publish':
+            from agent_research_intelligence.research.agent_report import publish_report
+            result=publish_report(workspace,args.packet,args.draft)
         elif args.command == 'initial-read':
             from agent_research_intelligence.research.initial_reads import run
             result=run(workspace,args.question_id)
