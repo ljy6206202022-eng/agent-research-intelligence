@@ -34,7 +34,7 @@ Python 3.11 is required for this alpha. On macOS or Linux with [uv](https://docs
 ```sh
 git clone https://github.com/ljy6206202022-eng/agent-research-intelligence.git
 cd agent-research-intelligence
-uv sync --locked
+uv sync --locked --no-editable
 uv run research-intel --help
 uv run research-intel init-store
 uv run research-intel doctor
@@ -95,4 +95,4 @@ Source discovery is not truth, captions and media can fail, speech and speaker a
 
 ## Development and license
 
-`uv sync --locked --group dev` and `uv run pytest` run synthetic tests. CI neither reads a real account nor downloads media or model weights. Use `python scripts/public_scan.py` before any release. Third-party models and source media are **not bundled**; review their licenses and source terms separately. This repository's code is [MIT licensed](LICENSE). See [validation](docs/validation.md) and [contributing](CONTRIBUTING.md).
+`uv sync --locked --group dev` and `uv run pytest` run synthetic tests. On a macOS volume that marks editable-install `.pth` files as hidden, Python skips those files and the CLI cannot import the package even after a successful sync. Use `uv sync --locked --group dev --no-editable` there, and sync again after editing source. CI neither reads a real account nor downloads media or model weights. Use `python scripts/public_scan.py` before any release. Third-party models and source media are **not bundled**; review their licenses and source terms separately. This repository's code is [MIT licensed](LICENSE). See [validation](docs/validation.md) and [contributing](CONTRIBUTING.md).
